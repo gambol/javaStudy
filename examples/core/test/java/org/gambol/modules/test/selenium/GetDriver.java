@@ -18,7 +18,7 @@ public class GetDriver {
 
     private final String REMOTE_URL = "http://xxxxx/wd/hub";
 
-    private final boolean isRemote = true;
+    private final boolean isRemote = false;
 
     public static GetDriver getInstance() {
         if (instance == null) {

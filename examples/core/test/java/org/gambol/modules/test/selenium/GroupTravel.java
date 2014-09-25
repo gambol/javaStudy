@@ -106,6 +106,5 @@ public class GroupTravel {
         }
 
         driver.findElement(By.cssSelector("a.save_next_btn")).click();
-
     }
 }
