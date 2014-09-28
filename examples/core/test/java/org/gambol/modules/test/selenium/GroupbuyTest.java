@@ -45,7 +45,7 @@ public class GroupbuyTest extends TestCase {
             CommonFunction.clickGoPaying(driver);
 
             CommonFunction.goToLastWindow(driver);
-            
+
             System.out.println("跟团游购买测试OK");
         } catch (Exception e) {
             e.printStackTrace();
