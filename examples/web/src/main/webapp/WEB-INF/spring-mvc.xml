@@ -56,4 +56,16 @@
         </property>
     </bean>
 
+
+
+    <!-- 接口的具体实现类 -->
+    <bean id="hessianService" class="org.gambol.examples.hessian.HessianServiceImpl" />
+    <!-- 使用Spring的HessianServie做代理 -->
+    <bean name="/helloSpring"
+          class="org.springframework.remoting.caucho.HessianServiceExporter">
+        <!-- service引用具体的实现实体Bean-->
+        <property name="service" ref="hessianService" />
+        <property name="serviceInterface" value="org.gambol.examples.hessian.HessianService" />
+    </bean>
+
 </beans>

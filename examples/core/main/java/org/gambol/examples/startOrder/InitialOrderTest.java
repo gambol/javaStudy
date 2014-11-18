@@ -1,5 +1,7 @@
 package org.gambol.examples.startOrder;
 
+import sun.nio.ch.ThreadPool;
+
 /**
  * User: zhenbao.zhou
  * Date: 10/21/14
@@ -35,6 +37,4 @@ public class InitialOrderTest {
         this.prefix = prefix;
         System.out.println(prefix + " 构造器");
     }
-
-
 }
