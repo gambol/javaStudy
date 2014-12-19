@@ -1,9 +1,11 @@
 package org.gambol.examples.web;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.gambol.examples.spring.service.TestValidateService;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,9 @@ public class TestController {
 
     Logger logger = LoggerFactory.getLogger(TestController.class);
 
+    @Autowired
+    private TestValidateService testValidateService;
+
     @RequestMapping("helloWorld.sp")
     public String helloWorld() {
         return "helloWorld";
@@ -37,6 +42,13 @@ public class TestController {
         map.put("key2", 2);
 
         return map;
+    }
+
+    @RequestMapping("test_validate.json")
+    public @ResponseBody String testValidate(int big, int small) {
+
+        testValidateService.serviceA(big, small);
+        return "haha";
     }
 
     //

@@ -585,6 +585,14 @@
                 <scope>test</scope>
             </dependency>
 
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.14.4</version>
+            </dependency>
+
             <!-- mockito -->
             <dependency>
                 <groupId>org.mockito</groupId>
