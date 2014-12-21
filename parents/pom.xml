@@ -10,7 +10,6 @@
 
     <properties>
         <!-- 主要依赖库的版本定义 -->
-        <springside.version>4.2.3-SNAPSHOT</springside.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <mybatis.version>3.2.7</mybatis.version>
@@ -864,12 +863,14 @@
                             </goals>
                             <configuration>
                                 <rules>
+
                                     <requireMavenVersion>
-                                        <version>3.0.3</version>
+                                        <version>3.0.5</version>
                                     </requireMavenVersion>
                                     <requireJavaVersion>
-                                        <version>1.6</version>
+                                        <version>1.8</version>
                                     </requireJavaVersion>
+                                    <!--
                                     <bannedDependencies>
                                         <searchTransitive>true</searchTransitive>
                                         <excludes>
@@ -881,6 +882,7 @@
                                             <include>org.springframework:*:4.0.*</include>
                                         </includes>
                                     </bannedDependencies>
+                                    -->
                                 </rules>
                                 <fail>true</fail>
                             </configuration>

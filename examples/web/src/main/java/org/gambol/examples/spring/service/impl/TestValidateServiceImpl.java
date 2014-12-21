@@ -18,7 +18,7 @@ public class TestValidateServiceImpl implements TestValidateService{
 
     public void serviceA(int bigOne, int smallOne) {
 
-        log.info("big one :{}, small one: {}", bigOne, smallOne);
+        //log.info("big one :{}, small one: {}", bigOne, smallOne);
 
     }
 

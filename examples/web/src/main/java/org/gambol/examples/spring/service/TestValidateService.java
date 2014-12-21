@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
  * Date: 12/19/14
  * Time: 7:41 PM
  */
-@Service
 public interface TestValidateService {
 
     public void serviceA(int bigOne, int smallOne);

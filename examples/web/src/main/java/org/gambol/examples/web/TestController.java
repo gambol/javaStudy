@@ -2,6 +2,7 @@ package org.gambol.examples.web;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.gambol.examples.spring.service.TestValidateService;
+import org.gambol.examples.spring.service.impl.TestValidateServiceImpl;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
