@@ -1,6 +1,7 @@
 package org.gambol.examples.spring.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.gambol.examples.spring.annotation.ValidatorMethod;
 import org.gambol.examples.spring.service.TestValidateService;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,15 @@ import org.springframework.stereotype.Service;
 public class TestValidateServiceImpl implements TestValidateService{
 
 
+    @ValidatorMethod("check")
     public void serviceA(int bigOne, int smallOne) {
 
-        //log.info("big one :{}, small one: {}", bigOne, smallOne);
+        log.info("big one :{}, small one: {}", bigOne, smallOne);
+
+    }
+
+    private void check(int bigOne, int smallOne) {
+        if (smallOne > bigOne) throw new RuntimeException("small one is bigger than bigOne");
 
     }
 
