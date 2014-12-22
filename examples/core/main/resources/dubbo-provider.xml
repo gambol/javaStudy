@@ -9,7 +9,7 @@
         ">
 
     <!-- 具体的实现bean -->
-    <bean id="dubboService" class="org.gambol.examples.dubbo.provider.DubboServiceImpl" />
+    <bean id="dubboService" class="gambol.examples.dubbo.provider.DubboServiceImpl" />
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="xixi_provider"  />
@@ -24,6 +24,6 @@
     <dubbo:protocol name="dubbo" port="20880" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="org.gambol.examples.dubbo.provider.DubboService" ref="dubboService" />
+    <dubbo:service interface="gambol.examples.dubbo.provider.DubboService" ref="dubboService" />
 
 </beans>

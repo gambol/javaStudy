@@ -2,7 +2,7 @@ package org.gambol.modules.mapper;
 
 import junit.framework.TestCase;
 import org.dozer.Mapping;
-import org.gambol.examples.mappers.DozerMapper;
+import gambol.examples.mappers.DozerMapper;
 import org.junit.Test;
 
 import java.util.List;

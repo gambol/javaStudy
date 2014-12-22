@@ -3,7 +3,7 @@ package org.gambol.modules.mapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import junit.framework.TestCase;
-import org.gambol.examples.mappers.JacksonMapper;
+import gambol.examples.mappers.JacksonMapper;
 import org.junit.Test;
 
 import java.util.List;
