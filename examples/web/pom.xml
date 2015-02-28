@@ -50,6 +50,12 @@
         </dependency>
         <!-- AOP end -->
 
+        <dependency>
+            <groupId>gambol</groupId>
+            <artifactId>javaStudy-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- PERSISTENCE begin -->
         <!-- mybatis -->
         <dependency>
@@ -261,6 +267,13 @@
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.qunar.mobile</groupId>
+            <artifactId>qunar-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- GENERAL UTILS end -->
 
         <!-- OTHER TOOLS begin -->
@@ -268,6 +281,7 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
         </dependency>
+
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -372,6 +386,7 @@
             <artifactId>lombok</artifactId>
             <version>1.14.4</version>
         </dependency>
+
         <!-- TEST end -->
     </dependencies>
 
