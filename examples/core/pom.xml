@@ -190,6 +190,14 @@
 
         <!-- BTRACE END -->
 
+        <!-- MQ -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>rabbitmq-client</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <!-- MQ END -->
+
         <!-- TEST MODULE begin -->
         <dependency>
             <groupId>org.eclipse.jetty.aggregate</groupId>

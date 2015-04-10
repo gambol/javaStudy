@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -65,6 +65,7 @@
     <orderEntry type="library" name="Maven: com.sun.tools.btrace:btrace-boot:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.sun.tools.btrace:btrace-client:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: com.sun.tools.btrace:btrace-agent:1.2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.rabbitmq:rabbitmq-client:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.jetty.aggregate:jetty-webapp:7.6.15.v20140411" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.eclipse.jetty.orbit:javax.servlet:2.5.0.v201103041518" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.seleniumhq.selenium:selenium-java:2.42.2" level="project" />
