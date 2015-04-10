@@ -33,16 +33,16 @@ public class TestValidateServiceImpl implements TestValidateService {
 
     private void check(int bigOne, int smallOne, boolean flag) {
         // will not enter this method
-        log.info("error check  bigOne:{} , smallOne:{}", bigOne, smallOne);
+
         if (bigOne < smallOne) {
-            throw new RuntimeException("small one is bigger");
+            throw new RuntimeException("should not enter this method");
         }
     }
-
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         TestValidateServiceImpl bean = (TestValidateServiceImpl)ctx.getBean("testValidateService");
+        bean.serviceA(2,1);
         bean.serviceA(2,1);
     }
 

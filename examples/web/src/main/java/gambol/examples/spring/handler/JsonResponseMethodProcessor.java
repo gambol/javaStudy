@@ -18,7 +18,8 @@ public class JsonResponseMethodProcessor implements HandlerMethodReturnValueHand
 
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
-        return returnType.getMethodAnnotation(JsonResponse.class) != null;
+        boolean t=  returnType.getMethodAnnotation(JsonResponse.class) != null;
+        return t;
     }
 
     @Override
@@ -29,7 +30,6 @@ public class JsonResponseMethodProcessor implements HandlerMethodReturnValueHand
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
 
-        // JsonSerializer.write(returnValue, returnType.getMethod(), request, response);
+        JsonSerializer.write(returnValue, returnType.getMethod(), request, response);
     }
-
 }

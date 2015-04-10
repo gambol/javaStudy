@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.codehaus.jackson.type.TypeReference;
 
 import org.slf4j.Logger;
@@ -44,6 +45,20 @@ public class JacksonMapper {
             return null;
         }
     }
+
+
+    public static <T> String obj2JsonP(String callback, T src) {
+        if (src == null) {
+            return null;
+        }
+
+        if (callback == null) {
+            return obj2String(src);
+        } else {
+            return obj2String(new JSONPObject(callback, src));
+        }
+    }
+
 
     /**
      * Object => byte[]

@@ -1,5 +1,6 @@
 package gambol.examples.web;
 
+import gambol.examples.spring.annotation.JsonResponse;
 import gambol.examples.spring.service.TestValidateService;
 import gambol.examples.spring.service.impl.TestValidateServiceImpl;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import qunar.web.spring.annotation.JsonBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -67,8 +69,41 @@ public class TestController {
         logger.info("result:" + result.toString());
         return param;
     }
-}
 
+
+    @RequestMapping("json_response.json")
+    //@JsonBody
+    @ResponseBody
+    public
+    Foo testJsonResponse() {
+        Foo foo = new Foo();
+        foo.setAge(4);
+        foo.setName("name");
+        return foo;
+    }
+
+
+    @RequestMapping("json_response2.json")
+    @JsonBody
+    public
+    Foo testJsonResponse2() {
+        Foo foo = new Foo();
+        foo.setAge(4);
+        foo.setName("name");
+        return foo;
+    }
+
+
+    @RequestMapping("json_response3.json")
+    @JsonResponse
+    public
+    Foo testJsonResponse3() {
+        Foo foo = new Foo();
+        foo.setAge(4);
+        foo.setName("name");
+        return foo;
+    }
+}
 
 class Foo {
     String name;
@@ -87,11 +122,16 @@ class Foo {
         this.age = age;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // 在这个代码(Spring)里，json ignore不起作用
-    @JsonIgnore
+    /*@JsonIgnore
     public String getTrimName() {
         return name.trim();
     }
+    */
 }
 
 
