@@ -15,7 +15,7 @@ package java.lang;
  父类加载器BootStrap在JRE/lib目录的rt.jar找到了String.class，
  *
  */
-public class String{
+public class String2{
     int a ;
 
 }
