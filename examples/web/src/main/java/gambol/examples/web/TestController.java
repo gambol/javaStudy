@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import qunar.web.spring.annotation.JsonBody;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -84,7 +83,6 @@ public class TestController {
 
 
     @RequestMapping("json_response2.json")
-    @JsonBody
     public
     Foo testJsonResponse2() {
         Foo foo = new Foo();

@@ -6,11 +6,11 @@
         <groupId>gambol</groupId>
         <artifactId>javaStudy-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../parents/</relativePath>
+        <relativePath>../parents/</relativePath>
     </parent>
-    <artifactId>javaStudy-core</artifactId>
+    <artifactId>javaStudy-offer</artifactId>
     <packaging>jar</packaging>
-    <name>javaStudy :: example :: Core</name>
+    <name>javaStudy :: example :: Offer</name>
     <version>1.0.0</version>
 
     <dependencies>
