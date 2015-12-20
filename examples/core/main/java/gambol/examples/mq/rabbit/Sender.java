@@ -14,12 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Sender {
 
-    /**
-     * 两个routeKey
-     */
-    private static String info = "info";
-    private static String warn = "warn";
-
+    private static final String EXCHANGE_NAME = "logs";
     private static String queueName = "queue1";
 
     public static void main(String[] args) throws Exception {
@@ -49,6 +44,8 @@ public class Sender {
                 channel.basicPublish("", queueName, null, ("log:" + warn + counter++).getBytes());
             }
             TimeUnit.MILLISECONDS.sleep(1000);
-        }
+
+        channel.close();
+        connection.close();
     }
 }
