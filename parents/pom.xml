@@ -16,7 +16,7 @@
         <spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
         <tomcat-jdbc.version>7.0.54</tomcat-jdbc.version>
         <sitemesh.version>2.4.2</sitemesh.version>
-        <shiro.version>1.2.3</shiro.version>
+        <shiro.version>1.2.4</shiro.version>
         <cxf.version>2.7.11</cxf.version>
         <activemq.version>5.7.0</activemq.version>
         <quartz.version>2.2.1</quartz.version>
@@ -86,16 +86,6 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-entitymanager</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-ehcache</artifactId>
-                <version>${hibernate.version}</version>
-            </dependency>
 
             <!-- spring data jpa -->
             <dependency>
@@ -146,13 +136,7 @@
                 <version>${spring.version}</version>
             </dependency>
 
-            <!-- sitemesh -->
-            <dependency>
-                <groupId>opensymphony</groupId>
-                <artifactId>sitemesh</artifactId>
-                <version>${sitemesh.version}</version>
-                <scope>runtime</scope>
-            </dependency>
+
 
             <!-- j2ee web spec -->
             <!-- update to servlet 3.0 for spring 4.0 MockHttpServletRequest  -->
@@ -618,21 +602,6 @@
                 </exclusions>
             </dependency>
 
-            <!-- springside -->
-            <dependency>
-                <groupId>org.springside</groupId>
-                <artifactId>springside-core</artifactId>
-                <version>${springside.version}</version>
-                <classifier>tests</classifier>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springside</groupId>
-                <artifactId>springside-extension</artifactId>
-                <version>${springside.version}</version>
-                <classifier>tests</classifier>
-                <scope>test</scope>
-            </dependency>
 
             <!-- spring -->
             <dependency>
@@ -710,21 +679,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- redis simulator -->
-            <dependency>
-                <groupId>com.lordofthejars</groupId>
-                <artifactId>nosqlunit-redis</artifactId>
-                <version>${nosqlunit.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- memcached simulator -->
-            <dependency>
-                <groupId>com.thimbleware.jmemcached</groupId>
-                <artifactId>jmemcached-core</artifactId>
-                <version>1.0.0</version>
-                <scope>test</scope>
-            </dependency>
 
             <!-- smtp server simulator -->
             <dependency>

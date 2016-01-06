@@ -1,10 +1,9 @@
 package gambol.examples.mq.rabbit;
 
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,35 +14,24 @@ import java.util.concurrent.TimeUnit;
 public class Sender {
 
     private static final String EXCHANGE_NAME = "logs";
-    private static String queueName = "queue1";
 
-    public static void main(String[] args) throws Exception {
-        //ConnectionParameters param = new ConnectionParameters();
-        //param.setPassword("djb2c");
-        // param.setUsername("djb2c");
+    public static void main(String[] argv)
+            throws java.io.IOException, java.lang.InterruptedException {
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        //final Connection connection = factory.newConnection("192.168.236.89", 5672);
-        final Connection connection = factory.newConnection();
+        Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        /**
-         * 这里我们声明了direct
-         */
-        //channel.exchangeDeclare(1, queueName, "direct");
-        channel.queueDeclare( queueName, false, false, false, null);
 
-        int counter = 0;
-        Random random = new Random();
-        System.out.printf("sending");
+        channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
-        while (true) {
-            int a = random.nextInt(3);
-            if (a == 1) {
-                channel.basicPublish("", queueName, null, ("log:" + info + counter++).getBytes());
-            } else {
-                channel.basicPublish("", queueName, null, ("log:" + warn + counter++).getBytes());
-            }
-            TimeUnit.MILLISECONDS.sleep(1000);
+        String message = "";
+        for (int i = 0; i < 1000 ; i++) {
+            message = "send message  " + i;
+            channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes());
+            System.out.println(" [x] Sent '" + message + "'");
+            TimeUnit.SECONDS.sleep(1);
+        }
 
         channel.close();
         connection.close();
