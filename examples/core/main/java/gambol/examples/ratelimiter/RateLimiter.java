@@ -244,11 +244,11 @@ public abstract class RateLimiter {
        * Due to the slight delay of T1, T2 would have to sleep till 2.05 seconds,
        * and T3 would also have to sleep till 3.05 seconds.
      */
-        return create(SleepingCurrentTimeTicker.SYSTEM_TICKER, permitsPerSecond);
+        return create(SleepingTicker.SYSTEM_TICKER, permitsPerSecond);
     }
 
     @VisibleForTesting
-    static RateLimiter create(SleepingCurrentTimeTicker ticker, double permitsPerSecond) {
+    static RateLimiter create(SleepingTicker ticker, double permitsPerSecond) {
         RateLimiter rateLimiter = new Bursty(ticker, 1.0 /* maxBurstSeconds */);
         rateLimiter.setRate(permitsPerSecond);
         return rateLimiter;
@@ -277,12 +277,12 @@ public abstract class RateLimiter {
      * @param unit the time unit of the warmupPeriod argument
      */
     public static RateLimiter create(double permitsPerSecond, long warmupPeriod, TimeUnit unit) {
-        return create(SleepingCurrentTimeTicker.SYSTEM_TICKER, permitsPerSecond, warmupPeriod, unit);
+        return create(SleepingTicker.SYSTEM_TICKER, permitsPerSecond, warmupPeriod, unit);
     }
 
     @VisibleForTesting
     static RateLimiter create(
-            SleepingCurrentTimeTicker ticker, double permitsPerSecond, long warmupPeriod, TimeUnit unit) {
+            SleepingTicker ticker, double permitsPerSecond, long warmupPeriod, TimeUnit unit) {
         RateLimiter rateLimiter = new WarmingUp(ticker, warmupPeriod, unit);
         rateLimiter.setRate(permitsPerSecond);
         return rateLimiter;
@@ -290,7 +290,7 @@ public abstract class RateLimiter {
 
     @VisibleForTesting
     static RateLimiter createWithCapacity(
-            SleepingCurrentTimeTicker ticker, double permitsPerSecond, long maxBurstBuildup, TimeUnit unit) {
+            SleepingTicker ticker, double permitsPerSecond, long maxBurstBuildup, TimeUnit unit) {
         double maxBurstSeconds = unit.toMillis(maxBurstBuildup) / 1E+6;
         Bursty rateLimiter = new Bursty(ticker, maxBurstSeconds);
         rateLimiter.setRate(permitsPerSecond);
@@ -301,7 +301,7 @@ public abstract class RateLimiter {
      * The underlying timer; used both to measure elapsed time and sleep as necessary. A separate
      * object to facilitate testing.
      */
-    private final SleepingCurrentTimeTicker ticker;
+    private final SleepingTicker ticker;
 
     /**
      * The timestamp when the RateLimiter was created; used to avoid possible overflow/time-wrapping
@@ -319,8 +319,6 @@ public abstract class RateLimiter {
      */
     double maxPermits;
 
-    Storage storage = new Storage();
-
     /**
      * The interval between two unit requests, at our stable rate. E.g., a stable rate of 5 permits
      * per second has a stable interval of 200ms.
@@ -335,7 +333,7 @@ public abstract class RateLimiter {
      */
     private long nextFreeTicketMicros = 0L; // could be either in the past or future
 
-    private RateLimiter(SleepingCurrentTimeTicker ticker) {
+    private RateLimiter(SleepingTicker ticker) {
         this.ticker = ticker;
         this.offsetNanos = ticker.read();
     }
@@ -474,7 +472,6 @@ public abstract class RateLimiter {
         long microsToWait;
         synchronized (mutex) {
             long nowMicros = readSafeMicros();
-            nextFreeTicketMicros = storage.getValue(storage.KEY);
             if (nextFreeTicketMicros > nowMicros + timeoutMicros) {
                 return false;
             } else {
@@ -502,7 +499,6 @@ public abstract class RateLimiter {
                 + (long) (freshPermits * stableIntervalMicros);
 
         this.nextFreeTicketMicros = nextFreeTicketMicros + waitMicros;
-        storage.putValue(storage.KEY, nextFreeTicketMicros);
         this.storedPermits -= storedPermitsToSpend;
         return microsToNextFreeTicket;
     }
@@ -519,13 +515,11 @@ public abstract class RateLimiter {
 
     private void resync(long nowMicros) {
         // if nextFreeTicket is in the past, resync to now
-        nextFreeTicketMicros = storage.getValue(storage.KEY);
 
         if (nowMicros > nextFreeTicketMicros) {
             storedPermits = Math.min(maxPermits,
                     storedPermits + (nowMicros - nextFreeTicketMicros) / stableIntervalMicros);
             nextFreeTicketMicros = nowMicros;
-            storage.putValue(storage.KEY, nextFreeTicketMicros);
         }
     }
 
@@ -624,7 +618,7 @@ public abstract class RateLimiter {
         private double slope;
         private double halfPermits;
 
-        WarmingUp(SleepingCurrentTimeTicker ticker, long warmupPeriod, TimeUnit timeUnit) {
+        WarmingUp(SleepingTicker ticker, long warmupPeriod, TimeUnit timeUnit) {
             super(ticker);
             this.warmupPeriodMicros = timeUnit.toMicros(warmupPeriod);
         }
@@ -678,7 +672,7 @@ public abstract class RateLimiter {
         /** The work (permits) of how many seconds can be saved up if this RateLimiter is unused? */
         final double maxBurstSeconds;
 
-        Bursty(SleepingCurrentTimeTicker ticker, double maxBurstSeconds) {
+        Bursty(SleepingTicker ticker, double maxBurstSeconds) {
             super(ticker);
             this.maxBurstSeconds = maxBurstSeconds;
         }
@@ -706,52 +700,6 @@ public abstract class RateLimiter {
             @Override
             public long read() {
                 return systemTicker().read();
-            }
-
-            @Override
-            public void sleepMicrosUninterruptibly(long micros) {
-                if (micros > 0) {
-                    Uninterruptibles.sleepUninterruptibly(micros, TimeUnit.MICROSECONDS);
-                }
-            }
-        };
-    }
-
-    static class Storage {
-
-        private final static Logger logger = LoggerFactory.getLogger(Storage.class);
-        final static String KEY  = "redis_key12221";
-
-        JedisTemplate template;
-
-        public Storage() {
-            template = new JedisTemplate(new JedisPool(new JedisPoolConfig(), "10.86.43.225"));
-        }
-
-        public void putValue(String k, long value) {
-            template.set(k, String.valueOf(value));
-        }
-
-        public long getValue(String k){
-            String value = template.get(k);
-            long v = 0;
-            try {
-                v = Long.parseLong(value);
-            } catch (Exception e) {
-
-            }
-            return v;
-        }
-
-    }
-
-    static abstract class SleepingCurrentTimeTicker extends Ticker {
-        abstract void sleepMicrosUninterruptibly(long micros);
-
-        static final SleepingCurrentTimeTicker SYSTEM_TICKER = new SleepingCurrentTimeTicker() {
-            @Override
-            public long read() {
-                return System.currentTimeMillis();
             }
 
             @Override

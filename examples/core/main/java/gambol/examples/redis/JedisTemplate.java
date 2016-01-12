@@ -336,4 +336,15 @@ public class JedisTemplate {
             }
         });
     }
+
+
+    /**
+     * 返回hget对应的值
+     * @param key
+     * @param field
+     * @return
+     */
+    public String hget(final String key, final String field) {
+        return execute((Jedis jedis) ->  jedis.hget(key, field));
+    }
 }
