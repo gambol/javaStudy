@@ -268,11 +268,13 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>com.qunar.mobile</groupId>
             <artifactId>qunar-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        -->
 
         <!-- GENERAL UTILS end -->
 
