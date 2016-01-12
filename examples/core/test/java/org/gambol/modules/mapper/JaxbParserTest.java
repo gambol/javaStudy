@@ -1,10 +1,10 @@
-package java.org.gambol.modules.mapper;
-
+package org.gambol.modules.mapper;
 
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -13,7 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import com.google.common.collect.Maps;
 import gambol.examples.mappers.JAXBParser;
+import junit.framework.TestCase;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -39,12 +41,12 @@ import com.google.common.collect.Lists;
  * </user>
  * </pre>
  */
-public class JaxbParserTest {
+public class JaxbParserTest extends TestCase {
 
     JAXBParser parser = new JAXBParser(128, Collections.<String, String> emptyMap());
 
     @Test
-    public void objectToXml() {
+    public void testObjectToXml() {
         User user = new User();
         user.setId(1L);
         user.setName("calvin");
@@ -58,7 +60,7 @@ public class JaxbParserTest {
     }
 
     @Test
-    public void xmlToObject() {
+    public void testXmlToObject() {
         String xml = generateXmlByDom4j();
         User user = parser.fromXML(xml, User.class);
 
@@ -68,11 +70,30 @@ public class JaxbParserTest {
         assertThat(user.getInterests()).containsOnly("movie", "sports");
     }
 
+
+    @Test
+    public void testPrefix() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("calvin");
+
+        user.getInterests().add("movie");
+        user.getInterests().add("sports");
+
+        Map<String, String> namespacePrefixMapper = Maps.newHashMapWithExpectedSize(2);
+        namespacePrefixMapper.put("http://www.opentravel.org/OTA/2003/05", "ns");
+
+        JAXBParser parser = new JAXBParser(10, namespacePrefixMapper);
+        String xml = parser.toXML(user, true, false);
+        System.out.println("Jaxb Object to Xml result:\n" + xml);
+        assertXmlByDom4j(xml);
+    }
+
     /**
      * 测试以List对象作为根节点时的XML输出
      */
     @Test
-    public void toXmlWithListAsRoot() {
+    public void testToXmlWithListAsRoot() {
         User user1 = new User();
         user1.setId(1L);
         user1.setName("calvin");
@@ -124,7 +145,7 @@ public class JaxbParserTest {
         assertThat(((Element) interests.elements().get(0)).getText()).isEqualTo("movie");
     }
 
-    @XmlRootElement
+    @XmlRootElement(namespace="http://www.opentravel.org/OTA/2003/05")
     // 指定子节点的顺序
     @XmlType(propOrder = { "name", "interests" })
     private static class User {
