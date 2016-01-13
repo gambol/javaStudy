@@ -104,10 +104,10 @@ public class RedisTokenBucketLimiter {
 
         RedisTokenBucketLimiter limiter = new RedisTokenBucketLimiter(2, 1, pool);
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 Random random = new Random();
-                for (int j = 0; j < 100; j++) {
+                for (int j = 0; j < 20; j++) {
                     boolean result = limiter.take();
                     try {
                         Thread.sleep(random.nextInt(100));
@@ -119,6 +119,8 @@ public class RedisTokenBucketLimiter {
 
             }).start();
         }
+
+        Thread.sleep(10000);
 
     }
 

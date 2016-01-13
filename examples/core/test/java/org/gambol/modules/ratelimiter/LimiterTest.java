@@ -3,10 +3,12 @@ package org.gambol.modules.ratelimiter;
 import gambol.examples.ratelimiter.RateLimiter;
 
 //import com.google.common.util.concurrent.RateLimiter;
+import gambol.examples.ratelimiter.RateRestrainer;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -53,6 +55,30 @@ public class LimiterTest extends TestCase {
 
         countDownLatch.await();
 
+    }
+
+    @Test
+    public void testRedisTokenBucketRestrainer() throws Exception {
+        JedisPool jedisPool = new JedisPool("127.0.0.1");
+        String key = "lal";
+        RateRestrainer limiter = RateRestrainer.createRedisRestrainer(2.0, key, jedisPool);
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                Random random = new Random();
+                for (int j = 0; j < 10; j++) {
+                    limiter.acquire();
+                    try {
+                        Thread.sleep(random.nextInt(100));
+                    } catch (Exception e) {
+
+                    }
+                    logger.info("runtime :{},   threadNum:{}", j, Thread.currentThread().getId());
+                }
+
+            }).start();
+        }
+
+        Thread.sleep(100000);
     }
 
 }
