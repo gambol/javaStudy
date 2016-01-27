@@ -44,6 +44,7 @@ public class KVCentralizedTicker extends CentralizedTicker {
                 logger.error("error in write millisecond. try again", e);
             }
         }
+
     }
 
     /**
