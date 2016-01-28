@@ -98,6 +98,7 @@ public class LambdaExample {
 
         System.out.println("平均年龄：" + average.getAsDouble());
 
+
     }
 
     public static void main(String[] args) {

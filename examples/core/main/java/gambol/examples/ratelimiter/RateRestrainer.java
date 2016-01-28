@@ -36,12 +36,12 @@ public abstract class RateRestrainer {
      * @return
      */
     public final double getRate() {
+        // TODO 增加实现
         return 0.0;
     }
 
     /**
-     * 获取执行这条记录的permit。
-     * 如果获取不到，一直睡眠，直到获取成功
+     * 获取执行这条记录的permit。 如果获取不到，一直睡眠，直到获取成功
      */
     public double acquire() {
         long stepIntoTime = Ticker.read();
@@ -120,13 +120,12 @@ public abstract class RateRestrainer {
             long lastRefreshTimeInRedis = getLongFromRedis(LAST_REFRESH_TIME);
             long timeInRedisMills = fetchRedisTimeMills();
 
-            boolean flag = false;  // 运行结果
+            boolean flag = false; // 运行结果
             try {
                 final Transaction transaction = jedis.multi();
 
-                availableToken = Math.min(
-                        availableTokenInRedis + (timeInRedisMills - lastRefreshTimeInRedis) * tokenPerSecond / TimeUnit.SECONDS.toMillis(1L),
-                        maxAllowedToken);
+                availableToken = Math.min(availableTokenInRedis + (timeInRedisMills - lastRefreshTimeInRedis)
+                        * tokenPerSecond / TimeUnit.SECONDS.toMillis(1L), maxAllowedToken);
                 transaction.hset(redisKey, LAST_REFRESH_TIME, String.valueOf(timeInRedisMills));
 
                 if (availableToken >= 1) {
@@ -177,10 +176,8 @@ public abstract class RateRestrainer {
             return timeInRedis;
         }
 
-
         /**
-         * 从redis 的hash 里 取出相应field的值，转换成double。
-         * 如果转换失败（譬如为null，或者这个值不为double），则返回0
+         * 从redis 的hash 里 取出相应field的值，转换成double。 如果转换失败（譬如为null，或者这个值不为double），则返回0
          *
          * @return double值
          */
@@ -225,7 +222,7 @@ public abstract class RateRestrainer {
         /**
          * 预定成功，继续运行
          */
-        final static ReserveResult CONTINUE_RESULT =  new ReserveResult(0, false);
+        final static ReserveResult CONTINUE_RESULT = new ReserveResult(0, false);
 
         /**
          * 创建一个需要等待的对象
@@ -265,6 +262,5 @@ public abstract class RateRestrainer {
             }
         }
     }
-
 
 }
