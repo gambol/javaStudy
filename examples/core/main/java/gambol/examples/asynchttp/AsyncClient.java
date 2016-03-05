@@ -12,6 +12,8 @@ import com.ning.http.client.Response;
 import com.ning.http.client.providers.netty.NettyAsyncHttpProviderConfig;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.util.HashedWheelTimer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -41,7 +43,8 @@ public class AsyncClient {
 
     private static final Supplier<NioClientSocketChannelFactory> CHANNEL_FACTORY = Suppliers
             .memoize(new Supplier<NioClientSocketChannelFactory>() {
-                @Override public NioClientSocketChannelFactory get() {
+                @Override
+                public NioClientSocketChannelFactory get() {
                     return new NioClientSocketChannelFactory(AsyncClient.forkExecutor(), AsyncClient.forkExecutor(),
                             Runtime.getRuntime().availableProcessors());
                 }
@@ -75,8 +78,8 @@ public class AsyncClient {
         setIdleConnectionInPoolTimeoutInMs(60000);
 
         // connection conf
-        setMaximumConnectionsTotal(100);
-        setMaximumConnectionsPerHost(20);
+        setMaximumConnectionsTotal(4);
+        setMaximumConnectionsPerHost(4);
 
         // request conf
         setConnectionTimeoutInMs(1000);
@@ -136,7 +139,7 @@ public class AsyncClient {
         builder.setAllowPoolingConnections(allowPoolingConnection);
     }
 
-    <T> ListenableFuture<T> privateGet(String url,  AsyncHandler<T> handler) throws IOException {
+    <T> ListenableFuture<T> privateGet(String url, AsyncHandler<T> handler) throws IOException {
         AsyncHttpClient.BoundRequestBuilder builder = getClient().prepareGet(url);
 
 
@@ -150,41 +153,13 @@ public class AsyncClient {
      * 建AsyncCompletionHandlerBase，想记录异常的可以写个子类重写onThrow方法
      */
     public <T> ListenableFuture<T> get(final String url, AsyncHandler<T> handler) throws IOException {
-        return privateGet(url,  handler);
+        return privateGet(url, handler);
     }
-
 
 
     public static void main(String[] args) throws Exception {
 
-        AsyncHttpClient asyncHttpClient = new AsyncClient().getClient();
 
-        Future<Response> f = asyncHttpClient.prepareGet("http://www.baidu.com/").execute(
-                new AsyncCompletionHandler<Response>() {
-
-                    @Override
-                    public Response onCompleted(Response response) throws Exception {
-                        // Do something with the Response
-                        // ...
-                        try {
-                            Thread.sleep(3000);
-                        } catch (Exception e) {
-
-                        }
-
-                        System.out.println("ok, done. on complete:" + response.getStatusCode());
-                        return response;
-                    }
-
-                    @Override
-                    public void onThrowable(Throwable t) {
-                        // Something wrong happened.
-                        System.out.println("wacao. sss" + t.getMessage());
-                    }
-                });
-
-        Response r = f.get();
-        System.out.println("wocao. response:" + r.getResponseBody());
     }
 
     class GuavaListenableFuture<T> implements ListenableFuture<T> {

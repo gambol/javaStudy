@@ -16,5 +16,12 @@ public class Test {
 
         System.out.println(list.getLast());
         System.out.println(list.getFirst());
+
+
+        for(int i = 1; i < 20000; i = i+2) {
+            if ((i % 3 == 0) & (i % 4 == 1) && (i % 5 == 4) && (i % 6 == 3) && (i % 7 == 5) && (i % 8 == 1) && (i % 9 ==0)) {
+                System.out.println("i = " + i);
+            }
+        }
     }
 }
