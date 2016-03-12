@@ -1,0 +1,21 @@
+syntax = 'proto2';
+
+package benchmark;
+
+option java_package = "gambol.examples.protobuf.benchmark.protobuf.model";
+option java_multiple_files = true;
+
+enum Type {
+    UNKNOWN = 0;
+    FOO = 1;
+    BAR = 2;
+}
+
+message Foo {
+    optional Type type = 1;
+    optional bool flag = 2;
+    optional int32 num32 = 3;
+    optional int64 num64 = 4;
+    optional string str = 5;
+    repeated Foo children = 10;
+}

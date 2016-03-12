@@ -35,7 +35,7 @@ public final class JsonSerializer {
             logger.error("error in response request");
         } catch (Exception e) {
             logger.info("error", e);
-        }Ø
+        }
     }
 
 
