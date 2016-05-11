@@ -276,6 +276,13 @@
         </dependency>
         -->
 
+
+        <dependency>
+            <groupId>qunar.common</groupId>
+            <artifactId>common-core</artifactId>
+            <version>8.2.19</version>
+        </dependency>
+
         <!-- GENERAL UTILS end -->
 
         <!-- OTHER TOOLS begin -->
@@ -387,6 +394,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.14.4</version>
+        </dependency>
+        <dependency>
+            <groupId>qunar.common</groupId>
+            <artifactId>common-web</artifactId>
+            <version>8.2.19</version>
         </dependency>
 
         <!-- TEST end -->

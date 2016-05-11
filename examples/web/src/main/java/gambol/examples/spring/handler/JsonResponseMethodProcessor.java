@@ -30,6 +30,6 @@ public class JsonResponseMethodProcessor implements HandlerMethodReturnValueHand
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
 
-        JsonSerializer.write(returnValue, returnType.getMethod(), request, response);
+        //JsonSerializer.write(returnValue, returnType.getMethod(), request, response);
     }
 }

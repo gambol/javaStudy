@@ -87,10 +87,16 @@ public class Study {
             @Override
             protected Object handleInvocation(Object proxy, Method method, Object[] args)
                     throws Throwable {
+                System.out.println("lala nihao");
                 return null;
             }
         });
+
+
         foo2.fun();
+
+        FooI foo3 = Reflection.newProxy(FooI.class, new Handler(new Foo()));
+        foo3.fun();
     }
 
     public static void testInvokable() throws NoSuchMethodException {

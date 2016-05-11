@@ -24,6 +24,9 @@ public class Study {
          * （4）扩展工具类，迭代器
          */
 
+        Study s = new Study();
+        s.newCollection();
+
     }
 
     public void immutable() {

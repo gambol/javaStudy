@@ -19,7 +19,8 @@ public class Study {
         @Override
         public Bean load(Integer key) throws Exception {
             //return beanDao.select(key);
-            return null;
+
+            return new Bean();
         }
     }
 
@@ -65,6 +66,8 @@ public class Study {
          */
 
         //cache.getUnchecked(1);//直接出错
+
+
 
         try {
             cache.get(1);

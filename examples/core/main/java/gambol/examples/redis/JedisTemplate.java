@@ -15,8 +15,7 @@ import redis.clients.jedis.exceptions.JedisException;
 import redis.clients.util.Pool;
 
 /**
- * JedisTemplate 提供了一个template方法，负责对Jedis连接的获取与归还。
- * JedisAction<T> 和 JedisActionNoResult两种回调接口，适用于有无返回值两种情况。
+ * JedisTemplate 提供了一个template方法，负责对Jedis连接的获取与归还。 JedisAction<T> 和 JedisActionNoResult两种回调接口，适用于有无返回值两种情况。
  * 同时提供一些最常用函数的封装, 如get/set/zadd等。
  */
 public class JedisTemplate {
@@ -337,14 +336,14 @@ public class JedisTemplate {
         });
     }
 
-
     /**
      * 返回hget对应的值
+     * 
      * @param key
      * @param field
      * @return
      */
     public String hget(final String key, final String field) {
-        return execute((Jedis jedis) ->  jedis.hget(key, field));
+        return execute((Jedis jedis) -> jedis.hget(key, field));
     }
 }
