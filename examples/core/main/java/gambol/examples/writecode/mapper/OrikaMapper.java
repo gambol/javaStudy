@@ -27,6 +27,15 @@ public class OrikaMapper {
         String _age;
     }
 
+    void original() {
+
+        //Dozer
+        PersonSource personSource = new PersonSource("gb", 20);
+        PersonDest personDest = new PersonDest();
+        personDest.set_age(String.valueOf(personSource.getAge()));
+        personDest.set_name(personSource.getName());
+    }
+
     public void test() {
         mapperFactory.classMap(PersonSource.class, PersonDest.class)
                 .field("name", "_name")
@@ -35,6 +44,7 @@ public class OrikaMapper {
                 .register();
         PersonSource personSource = new PersonSource("gb", 20);
         PersonDest p = mapperFactory.getMapperFacade().map(personSource, PersonDest.class);
+
         System.out.print("dest:" + p);
 
     }

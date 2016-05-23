@@ -31,15 +31,10 @@ public class IfKiller {
         return "D";
     }
 
-    /**
-     * 修改之后的业务代码
-     */
-    Map map = ImmutableMap.of(3, "A", 4, "B", 5, "C");
-    final static String DEFAULT = "D";
 
     public String foo2(int input) {
-        return map.get(input) == null ? DEFAULT : (String)map.get(input);
+        Map<Integer, String> valueMap = ImmutableMap.of(3, "A", 4, "B", 5, "C");
+
+        return valueMap.getOrDefault(input, "D");
     }
-
-
 }

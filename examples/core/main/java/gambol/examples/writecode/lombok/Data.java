@@ -16,4 +16,8 @@ public class Data {
     String str2;
     String str3;
 
+    public static void main(String[] args) {
+        new Data().getStr1();
+    }
+
 }

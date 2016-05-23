@@ -178,7 +178,7 @@ public class Collections {
         mset.add("hello");
         mset.add("hello");
         System.out.println(mset.count("hello"));//3
-        System.out.println(mset.size());//1，3
+        System.out.println(mset.size());//3
         for (String e : mset.elementSet()) {
             System.out.println(e);
         }

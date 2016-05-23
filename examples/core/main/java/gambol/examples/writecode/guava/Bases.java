@@ -9,7 +9,7 @@ import com.google.common.base.Preconditions;
  */
 public class Bases {
 
-    public void testPredicate() {
+    public void testPreconditions() {
 
         // NullPointerException
         Preconditions.checkNotNull(null, "msg");
