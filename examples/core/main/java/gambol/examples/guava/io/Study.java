@@ -13,7 +13,6 @@ import java.util.List;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.io.Resources.getResource;
-import static com.google.common.io.Resources.newReaderSupplier;
 import static com.google.common.io.Resources.readLines;
 
 /**
@@ -38,19 +37,19 @@ public class Study {
 
         ByteStreams.copy(new FileInputStream(""),new FileOutputStream(""));
         ByteStreams.copy(new FileInputStream("").getChannel(),new FileOutputStream("").getChannel());
-        CharStreams.asCharSink(new OutputSupplier<Appendable>() {
-            @Override
-            public Appendable getOutput() throws IOException {
-                return new StringBuilder();
-            }
-        });
-
-        CharStreams.asCharSink(new OutputSupplier<Appendable>() {
-            @Override
-            public Appendable getOutput() throws IOException {
-                return new StringBuilder();
-            }
-        });
+//        CharStreams.asCharSink(new OutputSupplier<Appendable>() {
+//            @Override
+//            public Appendable getOutput() throws IOException {
+//                return new StringBuilder();
+//            }
+//        });
+//
+//        CharStreams.asCharSink(new OutputSupplier<Appendable>() {
+//            @Override
+//            public Appendable getOutput() throws IOException {
+//                return new StringBuilder();
+//            }
+//        });
 
         /**
          * 资源加载
