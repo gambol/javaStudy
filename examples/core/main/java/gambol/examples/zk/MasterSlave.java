@@ -18,7 +18,7 @@ public class MasterSlave {
     private static final String ZK_CONN_STR = "127.0.0.1:2181";
 
     private void elector() throws Exception {
-        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(100, 3);
         CuratorFramework client = CuratorFrameworkFactory.newClient(ZK_CONN_STR, retryPolicy);
         client.start();
         String APP_NAME = Thread.currentThread().getName();

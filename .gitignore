@@ -45,17 +45,8 @@ Thumbs.db
 src/main/filters/dev/default.properties
 catalina.home_IS_UNDEFINED/
 /bin
-b2c-web/src/main/webapp/include/ver/
-classes/
-b2c-admin/src/main/webapp/WEB-INF/views/refs/
-b2c-admin/src/main/webapp/WEB-INF/views/ver/
-b2c-admin/src/main/webapp/include/refs/
-b2c-admin/src/main/webapp/include/ver/
-b2c-frontend/src/main/webapp/include/ver/
-
-*.mapping
-b2c-admin/src/main/webapp/WEB-INF/views/touch/refs/
-b2c-admin/src/main/webapp/include/touch/refs/
+*out/
 
 #class
 examples/core/target
+*.class
