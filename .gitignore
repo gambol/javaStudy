@@ -46,6 +46,7 @@ src/main/filters/dev/default.properties
 catalina.home_IS_UNDEFINED/
 /bin
 *out/
+target/
 
 #class
 examples/core/target
