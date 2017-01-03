@@ -15,7 +15,9 @@ import org.joda.time.PeriodType;
 import org.joda.time.Seconds;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 简单介绍JodaTime的使用
@@ -161,8 +163,8 @@ public class ShowCase {
 
     // 计算区间
     public void test9() {
-        DateTime begin = new DateTime("2012-02-01");
-        DateTime end = new DateTime("2012-05-01");
+        DateTime begin = new DateTime("2016-02-01");
+        DateTime end = new DateTime("2016-05-01");
 
         // 计算区间毫秒数
         Duration d = new Duration(begin, end);
@@ -171,6 +173,8 @@ public class ShowCase {
         // 计算区间天数
         Period p = new Period(begin, end, PeriodType.days());
         int days = p.getDays();
+
+        System.out.println("days:" + days + " getWeeks:{}" + p.getWeeks());
 
         // 计算特定日期是否在该区间内
         Interval i = new Interval(begin, end);
@@ -203,4 +207,24 @@ public class ShowCase {
         String s5 = dateTime.toString("yyyy/MM/dd HH:mm Z");
     }
 
+    // 格式化输出
+    public void test12() {
+        java.time.LocalDate begin = java.time.LocalDate.parse("2016-02-01");
+        java.time.LocalDate end = java.time.LocalDate.parse("2016-05-01");
+
+        // 计算区间天数
+        java.time.Period p = java.time.Period.between(begin, end);
+        int days = p.getDays();
+
+        System.out.println("java8 days:" + days);
+
+        // 计算区间天数
+        java.time.Duration d = java.time.Duration.between(begin, end);
+        System.out.println("java8 days:" + d.toString());
+    }
+
+    public static void main(String[] args) {
+        new ShowCase().test9();
+        new ShowCase().test12();
+    }
 }
