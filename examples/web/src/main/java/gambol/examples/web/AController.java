@@ -16,8 +16,8 @@ import javax.annotation.Resource;
 @Controller
 public class AController {
 
-    //@Resource
-    // ConsoleService consoleService;
+    @Resource
+    ConsoleService consoleService;
 
     @Resource
     ContainerService containerService;
@@ -25,9 +25,10 @@ public class AController {
     @RequestMapping("/a.json")
     public @ResponseBody  String a() {
         try {
-            // AbstractConsole a = consoleService;
+            AbstractConsole a = consoleService;
 
             System.out.println("hahah");
+            containerService.setAbstractConsole(consoleService);
             // a.test();
 
             containerService.callConsole();
@@ -36,5 +37,12 @@ public class AController {
         }
 
         return "kkk";
+    }
+
+
+    @RequestMapping("/b.html")
+    public  String b() {
+
+        return "helloWorld";
     }
 }

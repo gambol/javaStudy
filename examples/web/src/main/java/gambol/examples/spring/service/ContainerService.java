@@ -1,10 +1,12 @@
 package gambol.examples.spring.service;
 
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by zhenbao.zhou on 16/6/22.
  */
+@Service
 public class ContainerService {
 
     @Setter

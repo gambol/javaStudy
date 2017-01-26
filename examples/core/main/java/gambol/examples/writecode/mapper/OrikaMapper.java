@@ -86,14 +86,6 @@ public class OrikaMapper {
         }
     }
 
-    public class MoneyFactory implements ObjectFactory<Money> {
-
-        public Money create(Object source, MappingContext destinationType) {
-            Money money = Money.of(0);
-            // set the default address
-            return money;
-        }
-    }
 
     public void test() {
         mapperFactory.classMap(PersonSource.class, PersonDest.class)
