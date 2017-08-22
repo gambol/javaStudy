@@ -1,5 +1,6 @@
 package gambol.examples.dubbo.consumer;
 
+import com.google.common.base.Optional;
 import gambol.examples.dubbo.provider.DubboService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,6 +21,9 @@ public class Consumer {
         DubboService demoService = (DubboService) context.getBean("dubboService"); //
         String hello = demoService.sayHello("tom"); // ִ
         System.out.println(hello); //
+
+        Optional<String> strNew = demoService.testOptional("kkk");
+        System.out.println("strNew:" + strNew.get());
 
         //
         List list = demoService.getUsers();

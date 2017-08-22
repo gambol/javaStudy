@@ -10,11 +10,13 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class BlockedQueue {
     public static void main(String[] args) throws InterruptedException {
 
-        LinkedBlockingDeque<Integer> basket = new LinkedBlockingDeque<>(3);
+//        LinkedBlockingDeque<Integer> basket = new LinkedBlockingDeque<>(3);
+//
+//        for (int i = 0; i < 4; i++) {
+//            basket.putFirst(i);
+//            System.out.println("add queue:" + i);
+//        }
 
-        for (int i = 0; i < 4; i++) {
-            basket.putFirst(i);
-            System.out.println("add queue:" + i);
-        }
+        System.err.println(System.currentTimeMillis());
     }
 }

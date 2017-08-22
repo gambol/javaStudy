@@ -1,5 +1,6 @@
 package gambol.examples.dubbo.provider;
 
+import com.google.common.base.Optional;
 import gambol.examples.dubbo.User;
 
 import java.util.ArrayList;
@@ -36,5 +37,9 @@ public class DubboServiceImpl implements DubboService {
         list.add(u2);
         list.add(u3);
         return list;
+    }
+
+    public Optional<String> testOptional(String str) {
+        return Optional.of("str:" + str);
     }
 }

@@ -149,4 +149,15 @@ public class JacksonMapper {
             return null;
         }
     }
+
+    public static void main(String[] args) {
+        Integer a = Integer.valueOf(1);
+
+        Integer b = new Integer(1);
+
+        System.err.println("aaa:" + (a == b));
+
+        System.err.println("a=1? :" + (1 == b));
+    }
+
 }

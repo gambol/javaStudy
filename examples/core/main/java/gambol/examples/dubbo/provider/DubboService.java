@@ -1,5 +1,7 @@
 package gambol.examples.dubbo.provider;
 
+import com.google.common.base.Optional;
+
 import java.util.List;
 
 /**
@@ -12,5 +14,7 @@ public interface DubboService {
     String sayHello(String name);
 
     List getUsers();
+
+    Optional<String> testOptional(String str);
 
 }

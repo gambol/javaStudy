@@ -39,10 +39,11 @@ public class AController {
         return "kkk";
     }
 
-
     @RequestMapping("/b.html")
     public  String b() {
 
         return "helloWorld";
     }
+
+
 }

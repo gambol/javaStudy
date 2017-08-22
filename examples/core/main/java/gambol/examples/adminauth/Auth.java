@@ -18,7 +18,6 @@ public class Auth {
     }
 
 
-
     public static String getMD5Code(String str) {
         String result = null;
         try {

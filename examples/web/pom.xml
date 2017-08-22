@@ -223,6 +223,13 @@
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
         <!-- XML end -->
 
         <!-- LOGGING begin -->
