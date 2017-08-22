@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <context:component-scan base-package="gambol,qunar.web.spring">
+    <context:component-scan base-package="gambol">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
@@ -28,7 +28,9 @@
         </mvc:return-value-handlers>
     </mvc:annotation-driven>
 
-
+    <mvc:interceptors>
+        <bean class="gambol.examples.spring.handler.ParamInterceptor" />
+    </mvc:interceptors>
 
     <!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
     <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
