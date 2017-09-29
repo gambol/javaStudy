@@ -10,7 +10,7 @@
 
     <properties>
         <!-- 主要依赖库的版本定义 -->
-        <spring.version>4.0.5.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
         <hibernate.version>4.3.5.Final</hibernate.version>
         <mybatis.version>3.2.7</mybatis.version>
         <spring-data-jpa.version>1.6.0.RELEASE</spring-data-jpa.version>
@@ -522,7 +522,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpcore</artifactId>
-                <version>4.3.2</version>
+                <version>4.4.6</version>
                 <exclusions>
                     <exclusion>
                         <groupId>commons-logging</groupId>
